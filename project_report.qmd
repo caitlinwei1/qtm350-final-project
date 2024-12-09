@@ -353,6 +353,69 @@ data.to_csv(output_further_cleaned_path, index=False)
 
 By completing the steps above, we have ensured that the dataset is clean, consistent, and ready for analysis. The careful handling of missing values and renaming of columns enhances both the usability and interpretability of the data. With a complete 50-year timespan and six well-defined variables, including fertility metrics and regional categorizations (Eastern and Southern Africa, North America, East Asia & Pacific, and the EU), the dataset provides a solid foundation for exploring meaningful patterns and conducting robust statistical analysis.
 
+## Summary Statistics
+
+### Summary Statistics By Region
+
+```{python}
+query1 = """
+SELECT
+    "Region",
+    COUNT("adolescent_fertility") AS count_observations,
+    AVG("adolescent_fertility") AS avg_adolescent_fertility,
+    MIN("adolescent_fertility") AS min_adolescent_fertility,
+    MAX("adolescent_fertility") AS max_adolescent_fertility,
+    AVG("gdp_per_capita") AS avg_gdp_per_capita,
+    AVG("school_enrollment_primary") AS avg_primary_enrollment,
+    AVG("school_enrollment_secondary") AS avg_secondary_enrollment,
+    AVG("school_enrollment_tertiary") AS avg_tertiary_enrollment
+FROM data_table
+GROUP BY "Region";
+"""
+# Execute the query and fetch results
+summary_stats = pd.read_sql_query(query1, conn)
+summary_stats
+```
+
+Based on the summary statistics above, we can see that Africa Eastern and Southern generally have higher adolescent fertility, lower gdp per capital and education enrollment compared to other regions.
+
+### Trend of Female Fertility Rate by Year
+
+```{python}
+query2 = """
+SELECT
+    "Year",
+    AVG("adolescent_fertility") AS avg_adolescent_fertility
+FROM data_table
+GROUP BY "Year"
+ORDER BY avg_adolescent_fertility ASC;
+"""
+# Execute the query and fetch results
+summary_stats1 = pd.read_sql_query(query2, conn)
+summary_stats1
+```
+
+The adolescent_fertility generally descrease over time on average. 
+
+### GDP Growth by Region
+
+```{python}
+query3 = """
+SELECT
+    "Region",
+    AVG("gdp_per_capita") AS avg_gdp_per_capita,
+    MAX("gdp_per_capita") - MIN("gdp_per_capita") AS gdp_growth
+FROM data_table
+GROUP BY "Region"
+ORDER BY gdp_growth DESC;
+"""
+# Execute the query and fetch results
+summary_stats2 = pd.read_sql_query(query3, conn)
+summary_stats2
+```
+
+The findings highlight significant economic disparities, with North America and the European Union leading in GDP per capita and growth, while Africa Eastern and Southern lags far behind.
+
 ## Data Visualization
 
 ```{python}
