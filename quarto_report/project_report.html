@@ -450,7 +450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a><span class="co">### Summary Statistics By Region</span></span>
 <span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>::: {<span class="co">#d90b9ba6 .cell execution_count=1}</span></span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>::: {<span class="co">#de405adc .cell execution_count=1}</span></span>
 <span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>``` {.python .cell<span class="op">-</span>code}</span>
 <span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -495,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4                     2.12988  </code></pre>
 </div>
 <p>:::</p>
-<div id="7dd71b10" class="cell" data-execution_count="2">
+<div id="b3e6c9d8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>query1 <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">    "Region",</span></span>
@@ -513,7 +513,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Execute the query and fetch results</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="op">=</span> pd.read_sql_query(query1, conn)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>summary_stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="48">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
 
@@ -590,7 +590,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Based on the summary statistics above, we can see that Africa Eastern and Southern generally have higher adolescent fertility, lower gdp per capital and education enrollment compared to other regions.</p>
 <section id="trend-of-female-fertility-rate-by-year" class="level3">
 <h3 class="anchored" data-anchor-id="trend-of-female-fertility-rate-by-year">Trend of Female Fertility Rate by Year</h3>
-<div id="9465a833" class="cell" data-execution_count="3">
+<div id="2b0671f0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>query2 <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">    "Year",</span></span>
@@ -602,7 +602,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Execute the query and fetch results</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>summary_stats1 <span class="op">=</span> pd.read_sql_query(query2, conn)</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>summary_stats1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="49">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <div>
 
 
@@ -875,7 +875,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="gdp-growth-by-region" class="level3">
 <h3 class="anchored" data-anchor-id="gdp-growth-by-region">GDP Growth by Region</h3>
-<div id="aa6fff52" class="cell" data-execution_count="4">
+<div id="8e0ca0aa" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>query3 <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">    "Region",</span></span>
@@ -888,7 +888,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Execute the query and fetch results</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>summary_stats2 <span class="op">=</span> pd.read_sql_query(query3, conn)</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>summary_stats2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="50">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <div>
 
 
@@ -937,7 +937,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
-<div id="16ae03e4" class="cell" data-execution_count="5">
+<div id="20b75c35" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import necessary libraries</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1206,7 +1206,7 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 <h1>Regression Analysis</h1>
 <section id="rename-and-reshape-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="rename-and-reshape-dataset">Rename and Reshape dataset</h2>
-<div id="9dd6ae1b" class="cell" data-execution_count="12">
+<div id="b4d46c94" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import necessary packages and dataset</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1219,11 +1219,11 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stargazer.stargazer <span class="im">import</span> Stargazer</span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.display <span class="im">import</span> HTML</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1b3f7587" class="cell" data-execution_count="13">
+<div id="3f0ef83d" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use relative paths to increase reproducibility</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/WBData_Further_Cleaned.csv"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c2db0ca3" class="cell" data-execution_count="14">
+<div id="4ffe3c18" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename "Country Name" to "Region"</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data.rename(columns<span class="op">=</span>{<span class="st">"Country Name"</span>: <span class="st">"Region"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape the dataset to a long format</span></span>
@@ -1231,10 +1231,10 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                      var_name<span class="op">=</span><span class="st">"Year"</span>, </span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                      value_name<span class="op">=</span><span class="st">"Value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="51c324e3" class="cell" data-execution_count="15">
+<div id="e4c1e934" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the dataset</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data_long.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="61">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 
 
@@ -1290,7 +1290,7 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 </div>
 </div>
 </div>
-<div id="1a502a88" class="cell" data-execution_count="16">
+<div id="f7c9928d" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean the Year column</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data_long[<span class="st">'Year'</span>] <span class="op">=</span> data_long[<span class="st">'Year'</span>].<span class="bu">str</span>.extract(<span class="st">'(\d+)'</span>).astype(<span class="bu">int</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot to create a clean dataset for analysis</span></span>
@@ -1310,7 +1310,7 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 <section id="correlation-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="correlation-analysis">Correlation Analysis</h2>
 <p>In this part, we generate the correlation matrices for all variables in four regions.</p>
-<div id="2f853802" class="cell" data-execution_count="17">
+<div id="d37be4f8" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1370,14 +1370,14 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 <section id="ols-regression-before-standardizing-variables" class="level3">
 <h3 class="anchored" data-anchor-id="ols-regression-before-standardizing-variables">OLS Regression before standardizing variables</h3>
 <p>We only include school_enrollment_secondary and tertiary since there is perfect multicollinearity within the school_enrollment category.</p>
-<div id="e07f0329" class="cell" data-execution_count="18">
+<div id="051bf8a4" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="op">=</span> smf.ols(formula<span class="op">=</span><span class="st">'adolescent_fertility ~ gdp_per_capita+ school_enrollment_secondary+school_enrollment_tertiary'</span>,</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>             data<span class="op">=</span>analysis_data).fit()</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># add dummies region and year</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>m2 <span class="op">=</span> smf.ols(formula<span class="op">=</span><span class="st">'adolescent_fertility ~ gdp_per_capita + school_enrollment_secondary+school_enrollment_tertiary+C(Region)+C(Year)'</span>,</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>             data<span class="op">=</span>analysis_data).fit()</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>m2.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
+<div class="cell-output cell-output-display" data-execution_count="41">
 <table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>OLS Regression Results</caption>
 <tbody>
@@ -1407,7 +1407,7 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>18:08:17</td>
+<td>18:33:11</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-512.12</td>
 </tr>
@@ -1989,7 +1989,7 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 <br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 1.41e+06. This might indicate that there are<br>strong multicollinearity or other numerical problems.
 </div>
 </div>
-<div id="ae177d89" class="cell" data-execution_count="19">
+<div id="ddf43659" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ms <span class="op">=</span> Stargazer([m1,m2])</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>HTML(ms.render_html())</span>
@@ -1997,7 +1997,7 @@ Figure&nbsp;6: Scatterplot showing the Relationship Between Tertiary School Enro
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ms.title(<span class="st">'Regression on Fertility'</span>)</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>ms.custom_columns([<span class="st">'All'</span>,<span class="st">'With Dummies'</span>], [<span class="dv">1</span>, <span class="dv">1</span>])</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>HTML(ms.render_html())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="65">
+<div class="cell-output cell-output-display" data-execution_count="42">
 Regression on Fertility<br><table style="text-align:center"><tbody><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
 <tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable: adolescent_fertility</em></td></tr><tr><td style="text-align:left"></td></tr><tr><td></td><td colspan="1">All</td><td colspan="1">With Dummies</td></tr><tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
@@ -2124,7 +2124,7 @@ Regression on Fertility<br><table style="text-align:center"><tbody><tr><td colsp
 </section>
 <section id="standardizing-and-refining-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="standardizing-and-refining-dataset">Standardizing and refining dataset</h3>
-<div id="38816f3c" class="cell" data-execution_count="20">
+<div id="151f7996" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Group years into decades</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>analysis_data[<span class="st">"Year_grouped"</span>] <span class="op">=</span> (analysis_data[<span class="st">"Year"</span>] <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -2149,7 +2149,7 @@ Regression on Fertility<br><table style="text-align:center"><tbody><tr><td colsp
 <span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>scaled_data[<span class="st">'Year_grouped'</span>] <span class="op">=</span> analysis_data[<span class="st">'Year_grouped'</span>]</span>
 <span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>scaled_data[<span class="st">'Region'</span>] <span class="op">=</span> analysis_data[<span class="st">'Region'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5646a53f" class="cell" data-execution_count="21">
+<div id="9b2a7966" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Add dummy variables for 'Region' and the new 'Year_grouped' column</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.get_dummies(scaled_data, columns<span class="op">=</span>[<span class="st">"Region"</span>, <span class="st">"Year_grouped"</span>], drop_first<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2159,12 +2159,12 @@ Regression on Fertility<br><table style="text-align:center"><tbody><tr><td colsp
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Confirm the changes</span></span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/ht/cp5bzsp52ll5g4wdvrjntjmh0000gn/T/ipykernel_18825/1281065974.py:5: FutureWarning:
+<pre><code>/var/folders/ht/cp5bzsp52ll5g4wdvrjntjmh0000gn/T/ipykernel_20207/1281065974.py:5: FutureWarning:
 
 Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
 </code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="67">
+<div class="cell-output cell-output-display" data-execution_count="44">
 <div>
 
 
@@ -2289,7 +2289,7 @@ Downcasting behavior in `replace` is deprecated and will be removed in a future 
 </section>
 <section id="comparison-between-ridge-and-ols-regression-after-revising-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-between-ridge-and-ols-regression-after-revising-dataset">Comparison between Ridge and OLS Regression after revising dataset</h3>
-<div id="d001dd11" class="cell" data-execution_count="22">
+<div id="2d96c1d6" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> RidgeCV, Ridge</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
@@ -2377,7 +2377,7 @@ OLS Regression: R^2 = 0.987, MSE = 0.013</code></pre>
 </section>
 <section id="run-ridge-model-to-check-rubustness" class="level3">
 <h3 class="anchored" data-anchor-id="run-ridge-model-to-check-rubustness">Run Ridge Model to Check Rubustness</h3>
-<div id="1f388754" class="cell" data-execution_count="23">
+<div id="1daa2ef6" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> RidgeCV, Ridge</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
