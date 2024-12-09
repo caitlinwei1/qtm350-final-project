@@ -52,12 +52,12 @@ GDP per capita is calculated by dividing the gross domestic product (GDP) by the
 
 We used both SQL and Python in our data cleaning process. 
 
-```{python}
-#| echo: true
-#| eval: true
+```python
+# This is quoted code and won't run
+import pandas as pd
 import pandas as pd
 
-csv_file = '/Users/maxjiang/Desktop/WBData.csv'
+csv_file = '/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/WBData.csv'
 df = pd.read_csv(csv_file)
 
 create_table = "CREATE TABLE wb_data (\n"
@@ -78,11 +78,10 @@ with open("wb_data.sql", "w") as f:
     f.write(sql_script)
 
 print("SQL script saved to wb_data.sql")
-```
 
-```{python}
-#| echo: true
-#| eval: true
+
+```python
+# This is quoted code and won't run
 import dask.datasets
 import dask.dataframe as dd
 from dask_sql import Context
@@ -93,11 +92,10 @@ df = dd.read_csv("/Users/maxjiang/Desktop/WBData.csv")
 c.create_table("wb_data", df)
 query = "SELECT * FROM wb_data"
 result = c.sql(query)
-```
 
-```{python}
-#| echo: true
-#| eval: true
+
+```python
+# This is quoted code and won't run
 import dask.dataframe as dd
 from dask_sql import Context
 
@@ -226,11 +224,9 @@ filled_df = filtered_df.map_partitions(fill_missing_values)
 c.create_table("wb_data_Further_cleaned", filled_df)
 
 filled_df.compute().to_csv("/Users/maxjiang/Desktop/WBData_Further_Cleaned.csv", index=False)
-```
 
-```{python}
-#| echo: true
-#| eval: true
+
+```python
 
 #Improved Version
 import dask.dataframe as dd
@@ -282,12 +278,9 @@ for col in categorical_columns:
     c.sql(query)
 
 filled_df.compute().to_csv("/Users/maxjiang/Desktop/WBData_Further_Cleaned.csv", index=False)
-```
 
-```{python}
-#| echo: true
-#| eval: true
 
+```python
 #Final Check using Python
 '''
 correct_file_path = '/Users/maxjiang/Desktop/WBData.csv'
@@ -349,13 +342,28 @@ data.columns = [col.split('_')[-1] if 'Year' in col else col for col in data.col
 output_further_cleaned_path = '/Users/maxjiang/Desktop/WBData_Further_Cleaned.csv'
 data.to_csv(output_further_cleaned_path, index=False)
 '''
-```
 
 By completing the steps above, we have ensured that the dataset is clean, consistent, and ready for analysis. The careful handling of missing values and renaming of columns enhances both the usability and interpretability of the data. With a complete 50-year timespan and six well-defined variables, including fertility metrics and regional categorizations (Eastern and Southern Africa, North America, East Asia & Pacific, and the EU), the dataset provides a solid foundation for exploring meaningful patterns and conducting robust statistical analysis.
 
 ## Summary Statistics
 
 ### Summary Statistics By Region
+
+```{python}
+import sqlite3
+import pandas as pd
+# Load the CSV file into a Pandas DataFrame
+file_path = "/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/data_for_sql.csv"  # Replace with your file path
+data = pd.read_csv(file_path)
+# Create an SQLite database (or connect to an existing one)
+conn = sqlite3.connect("data1.db")  
+# Load the DataFrame into an SQL table
+data.to_sql("data_table", conn, if_exists="replace", index=False)
+# Verify the table content
+query = "SELECT * FROM data_table LIMIT 5;"
+sample_data = pd.read_sql_query(query, conn)
+print(sample_data.head())
+```
 
 ```{python}
 query1 = """
@@ -427,7 +435,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the dataset
-file_path = "WBData_Further_Cleaned.csv"
+file_path = "/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/WBData_Further_Cleaned.csv" 
 data = pd.read_csv(file_path)
 ```
 
@@ -461,7 +469,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-Figure @fig-ado-fer-line illustrates trends in adolescent fertility rates (births per 1,000 women aged 15-19) across regions from 1974 to 2019:
+@fig-ado-fer-line illustrates trends in adolescent fertility rates (births per 1,000 women aged 15-19) across regions from 1974 to 2019:
 1. Africa Eastern and Southern consistently shows the highest fertility rates, but there has been a steady decline over time.
 2. North America has experienced fluctuations but maintains moderate levels of adolescent fertility compared to other regions.
 3. East Asia & Pacific and the European Union have the lowest adolescent fertility rates, showing significant declines and stabilizing at minimal levels over the years.
@@ -508,7 +516,7 @@ plt.show()
 
 ```
 
-Figure @fig-sec-fer-scat shows an obvious negative correlation between secondary school enrollment and adolescent fertility rate.
+@fig-sec-fer-scat shows an obvious negative correlation between secondary school enrollment and adolescent fertility rate.
 
 ```{python}
 #| echo: true
@@ -549,7 +557,7 @@ plt.show()
 
 ```
 
-Figure @fig-ter-fer-scat shows the relationship between tertiary school enrollment and adolescent fertility rate. The graph shows an obvious negative correlation between tertiary school enrollment and adolescent fertility rate; and compared to the previous graph of secondary education, the slope is steeper.
+@fig-ter-fer-scat shows the relationship between tertiary school enrollment and adolescent fertility rate. The graph shows an obvious negative correlation between tertiary school enrollment and adolescent fertility rate; and compared to the previous graph of secondary education, the slope is steeper.
 
 ```{python}
 #| echo: true
@@ -590,7 +598,7 @@ plt.show()
 
 ```
 
-Figure @fig-gdp-fer-scat shows an obvious negative correlation between GDP per capita and adolescent fertility rate; and compared to the previous graphs, the slope is the steepest.
+@fig-gdp-fer-scat shows an obvious negative correlation between GDP per capita and adolescent fertility rate; and compared to the previous graphs, the slope is the steepest.
 
 ```{python}
 #| echo: true
@@ -638,7 +646,7 @@ plt.grid(False)
 plt.show()
 ```
 
-Figure @fig-sec-gdp-scat demonstrates a positive relationship between secondary school enrollment (% gross) and GDP per capita across regions. Countries with higher secondary school enrollment tend to have higher GDP per capita, with distinct clustering patterns by region. North America and the European Union show the highest GDP per capita with high enrollment rates, while Africa exhibits lower GDP levels despite varying enrollment percentages.
+@fig-sec-gdp-scat demonstrates a positive relationship between secondary school enrollment (% gross) and GDP per capita across regions. Countries with higher secondary school enrollment tend to have higher GDP per capita, with distinct clustering patterns by region. North America and the European Union show the highest GDP per capita with high enrollment rates, while Africa exhibits lower GDP levels despite varying enrollment percentages.
 
 ```{python}
 #| echo: true
@@ -659,7 +667,7 @@ plt.grid(False)
 plt.show()
 ```
 
-Figure @fig-ter-gdp-scat highlights a positive correlation between tertiary school enrollment (% gross) and GDP per capita. Regions such as North America and the European Union exhibit high GDP per capita alongside higher tertiary enrollment rates, indicating the potential influence of advanced education on economic prosperity. Conversely, regions like Africa show lower GDP per capita and tertiary enrollment, suggesting gaps in higher education access and economic outcomes.
+@fig-ter-gdp-scat highlights a positive correlation between tertiary school enrollment (% gross) and GDP per capita. Regions such as North America and the European Union exhibit high GDP per capita alongside higher tertiary enrollment rates, indicating the potential influence of advanced education on economic prosperity. Conversely, regions like Africa show lower GDP per capita and tertiary enrollment, suggesting gaps in higher education access and economic outcomes.
 
 # Regression Analysis
 
@@ -681,7 +689,7 @@ from IPython.core.display import HTML
 
 ```{python}
 # use relative paths to increase reproducibility
-data = pd.read_csv('../data/WBData_Further_Cleaned.csv')
+data = pd.read_csv("/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/WBData_Further_Cleaned.csv" )
 ```
 
 ```{python}
@@ -740,6 +748,7 @@ for region in regions:
 ```
 
 Findings:
+
 1. The Role of Education:
 In all regions, higher secondary and tertiary school enrollments are strongly negatively correlated with adolescent fertility, which highlights the importance of advanced education in reducing teenage fertility rates.
 
@@ -969,3 +978,4 @@ First, the use of grouped year variables may oversimplify temporal changes and m
 
 Future studies could address these limitations by incorporating additional predictors, testing interaction effects, and using alternative modeling techniques to further disentangle the complex relationships influencing adolescent fertility. Despite these limitations, the results provide valuable insights for policymakers aiming to reduce adolescent fertility rates through targeted investments in education and economic development.
 
+# References
