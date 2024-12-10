@@ -1,0 +1,41 @@
++----------------------------+
+|  Database User Guide |
++----------------------------+
+| Version: 1.0               |
+| Date: 9 December 2024      |
+| Author: Caitlin Wei        |
++----------------------------+
+
++----------------------+          +------------------------------------------------------------------+
+| List of Tables       |          | General Notes                                                    |
++----------------------+          +------------------------------------------------------------------|
+| WBData                |          | Original World Bank dataset with series and yearly statistics.                
+| WBData_Further_Cleaned|          | Processed World Bank dataset with refined focus                                          |
+| data_for_sql          |          | Cleaned dataset for SQL-based analysis                                                                                      
++----------------------+          +------------------------------------------------------------------+
+
+WBData and WBData_Further_Cleaned table
+
++---------------------------+---------------+-------+------+-------------------------------+
+| Field                     | Type   | Null | Description                                  |
++---------------------------+---------------+-------+------+-------------------------------+
+| Country Name              | Object | NO   | Name of the country                          |
+| Country Code              | Object | NO   | ISO code for the country                     |
+| Series Name               | Object | NO   | Name of the indicator                        |                       
+| Series Code               | Object | NO   | Unique identifier for series                 |
+| [Year Columns] (1974-2023)| Float64| YES  | Yearly data for the indicator                |
++---------------------------+---------------+-------+------+-------------------------------+
+
+data_for_sql table
++-----------------------------+---------------+-------+------+-----------------+
+| Field                       | Type   | Null | Description                    |
++-----------------------------+---------------+-------+------+-----------------+
+| Region                     | Object  | NO  | Name of the region              |
+| Year                       | Int64   | NO  | Year of observation             |
+| adolescent_fertility       | Float64 | YES | Adolescent fertility rate       |
+| gdp_per_capita             | Float64 | YES | GDP per capita in US dollars    |
+| school_enrollment_primary  | Float64 | YES | School enrollment (primary, %)  |
+| school_enrollment_secondary| Float64 | YES | School enrollment (secondary, %)|
+| school_enrollment_tertiary | Float64 | YES | School enrollment (tertiary, %) |
++-----------------------------+---------------+-------+------+-----------------+
+
