@@ -1,68 +1,50 @@
 ---
 title: "How Economic Development and Educational Attainment Impact Female Fertility Rate: A Regression Approach"
-author: "Amanda Yang (2512275), Caitlin Wei (2551023), Max Jiang (2547409), Angela Xie (2515217)"
-date: "2024-12-08"
+author: "Amanda Yang, Caitlin Wei, Max Jiang, Angela Xie"
+date: "2024-12-09"
 format:
-  html: default
-  pdf: default
-bibliography: references.bib
+  html: 
+    code-block-style: pre-wrap
+  pdf: 
+    code-line-wrap: true
+    code-font-size: 9pt 
 ---
+
+# Group Member Emory IDs
+
+Amanda Yang: 2512275
+Caitlin Wei: 2551023
+Max Jiang: 2547409
+Angela Xie: 2515217
 
 # Introduction
 
-Female fertility rate is a vital indicator of societal development, reflecting not only population trends but also the economic, educational, and cultural contexts within a country. In today’s fast-paced, competitive world, women’s willingness and ability to give birth and raise children are profoundly influenced by advancements in economic development and educational attainment. Investigating these factors provides crucial insights into how nations can balance their growth trajectories with population stability, gender equity, and cultural sustainability.
+This research examines the relationship between economic development, educational attainment, and female fertility rates, focusing on adolescent fertility and total fertility rate as indicators of reproductive decisions and societal attitudes. Using World Bank data, the study employs multivariable regression to analyze how GDP per capita and school enrollment levels influence fertility rates across four regions: Eastern and Southern Africa, North America, East Asia & Pacific, and the European Union. The findings aim to guide policymakers on addressing demographic trends, labor markets, and public health while promoting gender equity and societal development.
 
-This research explores the relationship between economic development, educational achievement, and female fertility rates, focusing on two key indicators: adolescent fertility (ages 15-19) and total fertility rate (births per woman). These metrics serve as proxies for women’s reproductive decisions and societal attitudes towards childbearing. On the other hand, GDP per capita and school enrollment rates at the primary, secondary, and tertiary levels represent key dimensions of economic and educational progress.
-
-Using data from the World Bank, our group aims to construct a multivariable regression model to examine how economic development and educational attainment influence fertility rates across countries in four world regions: Eastern and Southern Africa, North America, East Asia & Pacific, and the European Union. In this model, GDP per capita and school enrollment at all levels will serve as explanatory variables, while adolescent fertility and total fertility rates will be the dependent variables. This approach will allow us to quantify the extent to which economic prosperity and education drive changes in fertility patterns globally.
-
-Insights from this study is critical for policymakers, as fertility rates affect labor markets, public health, and long-term demographic trends. This research contributes to a deeper understanding of how societies can navigate the challenges of development while supporting women’s empowerment and well-being.
+Our analysis reveals a relatively strong inverse relationship between GDP per capita and adolescent fertility rates, with higher economic development linked to lower adolescent fertility. Additionally, educational attainment, particularly at the primary and secondary levels, emerged as a significant factor in reducing fertility rates, highlighting the need for targeted investments in education to address demographic challenges.
 
 # Data Description
 
-We selected six variables from the World Bank open database: Adolescent fertility rate (births per 1,000 women ages 15-19), Fertility rate, total (births per woman), School enrollment, tertiary (% gross), School enrollment, secondary (% gross), School enrollment, primary (% gross), and GDP per capita (current US$). 
-
-## Adolescent Fertility Rate
-
-Adolescent fertility rate is the number of births per 1,000 women aged 15-19, providing a critical indicator of reproductive health and societal factors influencing early childbearing. Derived from vital registration systems, censuses, or surveys, it reflects access to education, contraception, and healthcare, with implications for maternal and child well-being in developing and developed regions.
-
-## Fertility Rate, Total
-
-Total fertility rate represents the average number of children a woman would bear during her lifetime if age-specific fertility rates remained constant. It is derived from vital registration systems, censuses, or surveys and reflects societal factors influencing reproduction, including economic conditions, healthcare, and women’s access to education and family planning.
-
-## Tertiary School Enrollment
-
-Female tertiary school enrollment (% gross) measures the gross enrollment ratio of female students in tertiary education as a percentage of the relevant age group population. Tertiary education generally encompasses programs beyond secondary school and may or may not lead to advanced research qualifications. Admission typically requires completing secondary education as a prerequisite. This indicator reflects women's access to higher education and is shaped by educational policies, cultural values, and economic factors. Data is standardized using UNESCO methodologies.
-
-## Secondary School Enrollment
-
-School Enrollment, Secondary, Female (% gross) measures the total female enrollment in secondary education as a percentage of the population of the age group officially corresponding to that education level. Secondary education completes the provision of basic education that began at the primary level, and aims at laying the foundations for lifelong learning and human development, by offering more subject- or skill-oriented instruction using more specialized teachers. Data is standardized using UNESCO methodologies.
-
-## Primary School Enrollment
-
-School Enrollment, Primary, Female (% gross) measures the gross enrollment ratio of female students in primary education as a percentage of the relevant age group population. Primary education provides children with basic reading, writing, and mathematics skills along with an elementary understanding of such subjects as history, geography, natural science, social science, art, and music. Data is standardized using UNESCO methodologies.
-
-## GDP Per Capita
-
-GDP per capita is calculated by dividing the gross domestic product (GDP) by the midyear population. GDP represents the total gross value added by all resident producers in the economy, including product taxes, and excluding subsidies not factored into product values. It does not account for depreciation of manufactured assets or the depletion and degradation of natural resources. The data are expressed in current U.S. dollars.
+We selected six variables from the World Bank open database: Adolescent fertility rate (births per 1,000 women ages 15-19), Fertility rate, total (births per woman), School enrollment, tertiary (% gross), School enrollment, secondary (% gross), School enrollment, primary (% gross), and GDP per capita (current US$).
 
 # Data Analysis
 
 ## Data Cleaning
 
-We used both SQL and Python in our data cleaning process. 
+We used both SQL and Python in our data cleaning process. We began by converting the CSV file into a Dask DataFrame, which allowed us to manage large datasets efficiently and in a distributed fashion. After loading the data, we examined the DataFrame’s columns and their data types to understand the structure and identify any potential irregularities. Whenever we encountered column names that included spaces or special characters, we renamed them to more SQL-friendly versions without changing their fundamental meaning, ensuring consistent naming conventions throughout the dataset. We also addressed missing values by imputing them with appropriate statistical measures, where we filled in the missing values with the average of two most recent years’ values. We also dropped out columns that will not be used later for data analysis to further clarify the dataset. Additionally, we verified that all numeric columns were properly recognized as numerical data types, converting strings to numeric types when necessary. Once these steps were complete, the data was free from easily fixable inconsistencies, the column names were standardized, and the dataset was prepared for SQL-based operations. At that point, we registered the cleaned and preprocessed DataFrame as a SQL table within Dask-SQL, ensuring that each column was accurately represented in the query context.
 
-```python
-# This is quoted code and won't run
-import pandas as pd
+```{python}
+#| echo: false
+#| eval: false
 import pandas as pd
 
-csv_file = '/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/WBData.csv'
+csv_file = '...data/WBData.csv'
 df = pd.read_csv(csv_file)
 
 create_table = "CREATE TABLE wb_data (\n"
 for col in df.columns:
-    col_name = col.replace(" ", "_").replace("[", "").replace("]", "").replace(".", "_")
+    col_name = col.replace(" ", "_").replace("[", "").
+    replace("]", "").replace(".", "_")
     dtype = "REAL" if pd.api.types.is_numeric_dtype(df[col]) else "TEXT"
     create_table += f"    {col_name} {dtype},\n"
 create_table = create_table.rstrip(",\n") + "\n);"
@@ -78,10 +60,12 @@ with open("wb_data.sql", "w") as f:
     f.write(sql_script)
 
 print("SQL script saved to wb_data.sql")
+```
 
 
-```python
-# This is quoted code and won't run
+```{python}
+#| echo: false
+#| eval: false
 import dask.datasets
 import dask.dataframe as dd
 from dask_sql import Context
@@ -105,7 +89,12 @@ c.create_table("wb_data", df)
 
 selected_columns = [
     "Country Name", "Series Name",
-    "1975 [YR1975]", "1976 [YR1976]", "2020 [YR2020]", "2021 [YR2021]", "2022 [YR2022]", "2023 [YR2023]"
+    "1975 [YR1975]", 
+    "1976 [YR1976]", 
+    "2020 [YR2020]", 
+    "2021 [YR2021]", 
+    "2022 [YR2022]", 
+    "2023 [YR2023]"
 ]
 filtered_df = df[selected_columns]
 
@@ -223,12 +212,12 @@ def fill_missing_values(df):
 filled_df = filtered_df.map_partitions(fill_missing_values)
 c.create_table("wb_data_Further_cleaned", filled_df)
 
-filled_df.compute().to_csv("/Users/maxjiang/Desktop/WBData_Further_Cleaned.csv", index=False)
+filled_df.compute().to_csv(".../WBData_Further_Cleaned.csv", index=False)
+```
 
-
-```python
-
-#Improved Version
+```{python}
+#| echo: false
+#| eval: false
 import dask.dataframe as dd
 from dask_sql import Context
 import pandas as pd
@@ -277,11 +266,12 @@ for col in categorical_columns:
     """
     c.sql(query)
 
-filled_df.compute().to_csv("/Users/maxjiang/Desktop/WBData_Further_Cleaned.csv", index=False)
+filled_df.compute().to_csv(".../WBData_Further_Cleaned.csv", index=False)
+```
 
-
-```python
-#Final Check using Python
+```{python}
+#| echo: false
+#| eval: false
 '''
 correct_file_path = '/Users/maxjiang/Desktop/WBData.csv'
 data = pd.read_csv(correct_file_path)
@@ -342,30 +332,38 @@ data.columns = [col.split('_')[-1] if 'Year' in col else col for col in data.col
 output_further_cleaned_path = '/Users/maxjiang/Desktop/WBData_Further_Cleaned.csv'
 data.to_csv(output_further_cleaned_path, index=False)
 '''
+```
 
-By completing the steps above, we have ensured that the dataset is clean, consistent, and ready for analysis. The careful handling of missing values and renaming of columns enhances both the usability and interpretability of the data. With a complete 50-year timespan and six well-defined variables, including fertility metrics and regional categorizations (Eastern and Southern Africa, North America, East Asia & Pacific, and the EU), the dataset provides a solid foundation for exploring meaningful patterns and conducting robust statistical analysis.
 
 ## Summary Statistics
 
 ### Summary Statistics By Region
 
 ```{python}
+#| echo: false
+#| eval: true
 import sqlite3
 import pandas as pd
+
 # Load the CSV file into a Pandas DataFrame
-file_path = "/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/data_for_sql.csv"  # Replace with your file path
+file_path = "/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/data_for_sql.csv"  
 data = pd.read_csv(file_path)
+
 # Create an SQLite database (or connect to an existing one)
 conn = sqlite3.connect("data1.db")  
+
 # Load the DataFrame into an SQL table
 data.to_sql("data_table", conn, if_exists="replace", index=False)
+
 # Verify the table content
 query = "SELECT * FROM data_table LIMIT 5;"
 sample_data = pd.read_sql_query(query, conn)
-print(sample_data.head())
 ```
 
+
 ```{python}
+#| echo: false
+#| eval: true
 query1 = """
 SELECT
     "Region",
@@ -382,32 +380,37 @@ GROUP BY "Region";
 """
 # Execute the query and fetch results
 summary_stats = pd.read_sql_query(query1, conn)
-summary_stats
+short_names = {
+    "count_observations": "Obs",
+    "avg_adolescent_fertility": "Avg_Fertility",
+    "min_adolescent_fertility": "Min_Fertility",
+    "max_adolescent_fertility": "Max_Fertility",
+    "avg_gdp_per_capita": "Avg_GDP",
+    "avg_primary_enrollment": "Prim_Enroll",
+    "avg_secondary_enrollment": "Sec_Enroll",
+    "avg_tertiary_enrollment": "Ter_Enroll",
+}
+# Apply new column names to the DataFrame
+summary_stats.rename(columns=short_names, inplace=True)
+
+# If transposing the DataFrame
+transposed_df = summary_stats.transpose()
+
+# Set the first row as the header and drop it from the data
+transposed_df.columns = transposed_df.iloc[0]
+transposed_df = transposed_df[1:]
+
+# Display the updated transposed DataFrame
+transposed_df
 ```
 
 Based on the summary statistics above, we can see that Africa Eastern and Southern generally have higher adolescent fertility, lower gdp per capital and education enrollment compared to other regions.
 
-### Trend of Female Fertility Rate by Year
-
-```{python}
-query2 = """
-SELECT
-    "Year",
-    AVG("adolescent_fertility") AS avg_adolescent_fertility
-FROM data_table
-GROUP BY "Year"
-ORDER BY avg_adolescent_fertility ASC;
-"""
-# Execute the query and fetch results
-summary_stats1 = pd.read_sql_query(query2, conn)
-summary_stats1
-```
-
-The adolescent_fertility generally descrease over time on average. 
-
 ### GDP Growth by Region
 
 ```{python}
+#| echo: false
+#| eval: true
 query3 = """
 SELECT
     "Region",
@@ -427,7 +430,7 @@ The findings highlight significant economic disparities, with North America and 
 ## Data Visualization
 
 ```{python}
-#| echo: true
+#| echo: false
 #| eval: true
 
 # Import necessary libraries
@@ -440,9 +443,12 @@ data = pd.read_csv(file_path)
 ```
 
 ```{python}
-#| echo: true
+#| echo: false
+#| eval: true
 #| fig-cap: "Line Plot showing the adolescent fertility rate from 1974 to 2019"
 #| fig-alt: "Adolescent Fertility Rate, 1974-2019"
+#| fig.height: 4
+#| fig.width: 4
 #| label: fig-ado-fer-line
 
 filtered_data = data[data['Series Name'] == 'Adolescent fertility rate (births per 1,000 women ages 15-19)']
@@ -452,11 +458,11 @@ filtered_data = filtered_data.drop(columns=['Series Name']).set_index('Country N
 filtered_data.index = filtered_data.index.str.replace('Year', '')  # Simplify year labels
 
 # Plot the data
-plt.figure(figsize=(12, 6))
+plt.figure(figsize=(6, 3))
 for country in filtered_data.columns:
     plt.plot(filtered_data.index, filtered_data[country], label=country)
 
-plt.title('Adolescent Fertility Rate (Births per 1,000 Women Ages 15-19)', fontsize=14)
+plt.title('Adolescent Fertility Rate (Births per 1,000 Women Ages 15-19)', fontsize=12)
 plt.xlabel('Year', fontsize=12)
 plt.ylabel('Fertility Rate', fontsize=12)
 plt.legend(title='Regions', bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=8)
@@ -475,10 +481,8 @@ plt.show()
 3. East Asia & Pacific and the European Union have the lowest adolescent fertility rates, showing significant declines and stabilizing at minimal levels over the years.
 
 ```{python}
-#| echo: true
-#| fig-cap: "Scatterplot showing the relationship between secondary school enrollment and adolescent fertility rate"
-#| fig-alt: "Relationship Between Secondary School Enrollment and Adolescent Fertility Rate"
-#| label: fig-sec-fer-scat
+#| echo: false
+#| eval: true
 
 # Reshape the data to include all years
 melted_data = data.melt(id_vars=["Country Name", "Series Name"], var_name="Year", value_name="Value")
@@ -500,28 +504,38 @@ region_colors = {
     "European Union": "red"
 }
 merged_data["Color"] = merged_data["Country Name"].map(region_colors)
+```
+
+```{python}
+#| echo: false
+#| eval: false
+# fig-cap: "Scatterplot showing the relationship between secondary school enrollment and adolescent fertility rate"
+#| fig-alt: "Relationship Between Secondary School Enrollment and Adolescent Fertility Rate"
+#| fig.height: 4
+#| fig.width: 4
+#| label: fig-sec-fer-scat
 
 # Plot the scatter plot
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(6, 3))
 for region, color in region_colors.items():
     group = merged_data[merged_data["Color"] == color]
     plt.scatter(group["Value_Secondary"], group["Value_Fertility"], label=region, color=color, alpha=0.7)
 
 plt.title("Relationship Between Secondary School Enrollment and Adolescent Fertility Rate")
-plt.xlabel("Secondary School Enrollment (% gross)")
-plt.ylabel("Adolescent Fertility Rate (births per 1,000 women ages 15-19)")
+plt.xlabel("Secondary School Enrollment")
+plt.ylabel("Adolescent Fertility Rate")
 plt.legend(title="Region")
 plt.grid(False)
 plt.show()
-
 ```
 
-@fig-sec-fer-scat shows an obvious negative correlation between secondary school enrollment and adolescent fertility rate.
-
 ```{python}
-#| echo: true
+#| echo: false
+#| eval: true
 #| fig-cap: "Scatterplot showing the Relationship Between Tertiary School Enrollment and Adolescent Fertility Rate"
 #| fig-alt: "Relationship Between Tertiary School Enrollment and Adolescent Fertility Rate"
+#| fig.height: 4
+#| fig.width: 4
 #| label: fig-ter-fer-scat
 
 # Filter relevant data for fertility rate and tertiary school enrollment
@@ -543,14 +557,14 @@ region_colors = {
 merged_data["Color"] = merged_data["Country Name"].map(region_colors)
 
 # Plot the scatter plot
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(6, 3))
 for region, color in region_colors.items():
     group = merged_data[merged_data["Color"] == color]
     plt.scatter(group["Value_Tertiary"], group["Value_Fertility"], label=region, color=color, alpha=0.7)
 
 plt.title("Relationship Between Tertiary School Enrollment and Adolescent Fertility Rate")
-plt.xlabel("Tertiary School Enrollment (% gross)")
-plt.ylabel("Adolescent Fertility Rate (births per 1,000 women ages 15-19)")
+plt.xlabel("Tertiary School Enrollment")
+plt.ylabel("Adolescent Fertility Rate")
 plt.legend(title="Region")
 plt.grid(False)
 plt.show()
@@ -560,9 +574,12 @@ plt.show()
 @fig-ter-fer-scat shows the relationship between tertiary school enrollment and adolescent fertility rate. The graph shows an obvious negative correlation between tertiary school enrollment and adolescent fertility rate; and compared to the previous graph of secondary education, the slope is steeper.
 
 ```{python}
-#| echo: true
+#| echo: false
+#| eval: true
 #| fig-cap: "Scatterplot showing the Relationship Between GDP per Capita and Adolescent Fertility Rate"
 #| fig-alt: "Relationship Between GDP per Capita and Adolescent Fertility Rate"
+#| fig.height: 4
+#| fig.width: 4
 #| label: fig-gdp-fer-scat
 
 # Filter relevant data for adolescent fertility and GDP per capita
@@ -584,14 +601,14 @@ region_colors = {
 merged_data["Color"] = merged_data["Country Name"].map(region_colors)
 
 # Plot the scatter plot
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(6, 3))
 for region, color in region_colors.items():
     group = merged_data[merged_data["Color"] == color]
     plt.scatter(group["Value_GDP"], group["Value_Fertility"], label=region, color=color, alpha=0.7)
 
 plt.title("Relationship Between GDP per Capita and Adolescent Fertility Rate")
-plt.xlabel("GDP per Capita (US$)")
-plt.ylabel("Adolescent Fertility Rate (births per 1,000 women ages 15-19)")
+plt.xlabel("GDP per Capita")
+plt.ylabel("Adolescent Fertility Rate")
 plt.legend(title="Region")
 plt.grid(False)
 plt.show()
@@ -601,10 +618,8 @@ plt.show()
 @fig-gdp-fer-scat shows an obvious negative correlation between GDP per capita and adolescent fertility rate; and compared to the previous graphs, the slope is the steepest.
 
 ```{python}
-#| echo: true
-#| fig-cap: "Scatterplot showing the Relationship Between Secondary School Enrollment and GDP per Capita"
-#| fig-alt: "Relationship Between Secondary School Enrollment and GDP per Capita"
-#| label: fig-sec-gdp-scat
+#| echo: false
+#| eval: true
 
 # Filter relevant data for GDP per capita, secondary, and tertiary school enrollment
 gdp_data = melted_data[melted_data["Series Name"] == "GDP per capita (current US$)"]
@@ -632,9 +647,19 @@ region_colors = {
 # Map colors to regions
 merged_secondary["Color"] = merged_secondary["Country Name"].map(region_colors)
 merged_tertiary["Color"] = merged_tertiary["Country Name"].map(region_colors)
+```
+
+```{python}
+#| echo: false
+#| eval: false
+#| fig-cap: "Scatterplot showing the Relationship Between Secondary School Enrollment and GDP per Capita"
+#| fig-alt: "Relationship Between Secondary School Enrollment and GDP per Capita"
+#| fig.height: 4
+#| fig.width: 4
+#| label: fig-sec-gdp-scat
 
 # Plot for secondary school enrollment
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(6, 3))
 for region, color in region_colors.items():
     group = merged_secondary[merged_secondary["Color"] == color]
     plt.scatter(group["Value_Secondary"], group["Value_GDP"], label=region, color=color, alpha=0.7)
@@ -646,22 +671,23 @@ plt.grid(False)
 plt.show()
 ```
 
-@fig-sec-gdp-scat demonstrates a positive relationship between secondary school enrollment (% gross) and GDP per capita across regions. Countries with higher secondary school enrollment tend to have higher GDP per capita, with distinct clustering patterns by region. North America and the European Union show the highest GDP per capita with high enrollment rates, while Africa exhibits lower GDP levels despite varying enrollment percentages.
-
 ```{python}
-#| echo: true
+#| echo: false
+#| eval: true
 #| fig-cap: "Scatterplot showing the Relationship Between Tertiary School Enrollment and GDP per Capita"
 #| fig-alt: "Relationship Between Tertiary School Enrollment and GDP per Capita"
+#| fig.height: 4
+#| fig.width: 4
 #| label: fig-ter-gdp-scat
 
 # Plot for tertiary school enrollment
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(6, 3))
 for region, color in region_colors.items():
     group = merged_tertiary[merged_tertiary["Color"] == color]
     plt.scatter(group["Value_Tertiary"], group["Value_GDP"], label=region, color=color, alpha=0.7)
 plt.title("Relationship Between Tertiary School Enrollment and GDP per Capita")
-plt.xlabel("Tertiary School Enrollment (% gross)")
-plt.ylabel("GDP per Capita (current US$)")
+plt.xlabel("Tertiary School Enrollment")
+plt.ylabel("GDP per Capita")
 plt.legend(title="Region")
 plt.grid(False)
 plt.show()
@@ -671,9 +697,9 @@ plt.show()
 
 # Regression Analysis
 
-## Rename and Reshape dataset
-
 ```{python}
+#| echo: false
+#| eval: true
 # import necessary packages and dataset
 import pandas as pd
 import numpy as np
@@ -688,11 +714,15 @@ from IPython.core.display import HTML
 ```
 
 ```{python}
+#| echo: false
+#| eval: true
 # use relative paths to increase reproducibility
 data = pd.read_csv("/Users/yangziyu/Desktop/QTM 350/final_project/qtm350-final-project/data/WBData_Further_Cleaned.csv" )
 ```
 
 ```{python}
+#| echo: false
+#| eval: true
 # Rename "Country Name" to "Region"
 data.rename(columns={"Country Name": "Region"}, inplace=True)
 # Reshape the dataset to a long format
@@ -702,11 +732,8 @@ data_long = data.melt(id_vars=["Region", "Series Name"],
 ```
 
 ```{python}
-# Inspect the dataset
-data_long.head(5)
-```
-
-```{python}
+#| echo: false
+#| eval: true
 # Clean the Year column
 data_long['Year'] = data_long['Year'].str.extract('(\d+)').astype(int)
 # Pivot to create a clean dataset for analysis
@@ -726,25 +753,25 @@ analysis_data.rename(columns={
 ## Correlation Analysis
 
 In this part, we generate the correlation matrices for all variables in four regions.
+
 ```{python}
+#| echo: false
+#| eval: true
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Get the unique regions
-regions = analysis_data['Region'].unique()
+# Select numeric columns
+numeric_data = analysis_data.select_dtypes(include=[float, int])
 
-# Loop through each region and calculate the correlation matrix
-for region in regions:
-    region_data = analysis_data[analysis_data['Region'] == region]
-    numeric_data = region_data.select_dtypes(include=[float, int])
-    correlation_matrix = numeric_data.corr()
-    
-    # Plot the heatmap
-    plt.figure(figsize=(12, 10))
-    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
-    plt.title(f"Correlation Matrix for {region}")
-    plt.savefig(f"{region}_correlation_matrix.png")
-    plt.show()  # Close the plot to avoid overlapping
+# Calculate the correlation matrix for all regions
+correlation_matrix = numeric_data.corr()
+
+# Plot the heatmap for the entire dataset
+plt.figure(figsize=(12, 10))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Matrix for All Regions")
+plt.savefig("all_regions_correlation_matrix.png")
+plt.show()
 ```
 
 Findings:
@@ -762,9 +789,14 @@ Africa shows the strongest link between education and reduced fertility, while N
 
 ### OLS Regression before standardizing variables
 
-We only include school_enrollment_secondary and tertiary since there is perfect multicollinearity within the school_enrollment category.
+For the regression analysis, we initially use Ordinary Least Squares (OLS) as our baseline model. The independent variables include GDP per capita, region, year, primary school enrollment, and secondary school enrollment. To avoid perfect multicollinearity, we exclude tertiary school enrollment and use n-1 categories for the year and region variables.
+
+The OLS regression results reveal challenges in interpreting the model due to the inconsistent scaling of the independent variables, which makes it difficult to compare the effects of different regressors. For instance, most of the coefficients for the region variable are below -100. Additionally, the model exhibits strong multicollinearity.
 
 ```{python}
+#| echo: false
+#| eval: true
+#| output: false
 m1 = smf.ols(formula='adolescent_fertility ~ gdp_per_capita+ school_enrollment_secondary+school_enrollment_tertiary',
              data=analysis_data).fit()
 # add dummies region and year
@@ -774,6 +806,9 @@ m2.summary()
 ```
 
 ```{python}
+#| echo: false
+#| eval: true
+#| output: false
 ms = Stargazer([m1,m2])
 
 HTML(ms.render_html())
@@ -783,11 +818,14 @@ ms.custom_columns(['All','With Dummies'], [1, 1])
 HTML(ms.render_html())
 ```
 
-Through runing the OLS regression, we find that due to the inconsistent scale of different variables, it is difficult to make comparison between regressors. Also, there is strong multicollinearity in our model. To address these problems, we standardize variables and use Ridge regression to compare with OLS regression. There might be too many dummy variables as well. So we create a different variable called year_grouped that classify them into decades. 
+#### Standardizing and refining dataset 
 
-### Standardizing and refining dataset
+To address these problems, we standardize variables using StandardScaler library to make sure each variable has a (0,1) distribution. There might be too many dummy variables as well. So we create a different variable called year_grouped that classify specific years into decades.
 
 ```{python}
+#| echo: false
+#| eval: true
+#| output: false
 # Step 1: Group years into decades
 analysis_data["Year_grouped"] = (analysis_data["Year"] // 10) * 10
 from sklearn.preprocessing import StandardScaler
@@ -814,19 +852,24 @@ scaled_data['Region'] = analysis_data['Region']
 ```
 
 ```{python}
+#| echo: false
+#| eval: true
+#| output: false
 # Step 2: Add dummy variables for 'Region' and the new 'Year_grouped' column
 df = pd.get_dummies(scaled_data, columns=["Region", "Year_grouped"], drop_first=True)
 
 # Step 3: Replace boolean values (False -> 0, True -> 1) in the entire dataset
 df = df.replace({False: 0, True: 1})
-
-# Step 4: Confirm the changes
-df.head()
 ```
 
 ### Comparison between Ridge and OLS Regression after revising dataset
 
+To address problems about multicollinearity, we used Ridge regression to compare it with OLS using the refined dataset. We fine tuned the ridge regression by trying out different alphas. For ridge regression, the r squared is 0.958, and MSE is 0.042. For OLS regression, R squared is 0.987 and MSE is 0.013. Overall, ridge is better since it address multicollinearity and remain in a high r squared. 
+
 ```{python}
+#| echo: false
+#| eval: true
+#| output: false
 from sklearn.linear_model import RidgeCV, Ridge
 from sklearn.metrics import r2_score, mean_squared_error
 import statsmodels.api as sm
@@ -877,11 +920,14 @@ print(ols_coefficients)
 print(f"\nOLS Regression: R^2 = {ols_r2:.3f}, MSE = {ols_mse:.3f}")
 ```
 
-As shown in the table, ridge is better since it address multicollinearity and remain in a high r squared. 
 
 ### Run Ridge Model to Check Rubustness
 
+In order to check robustness, we tried out different ridge models by adding gap_per_capital, school_enrollment, region and Year_grouped variables accordingly. 
+
 ```{python}
+#| echo: false
+#| eval: true
 from sklearn.linear_model import RidgeCV, Ridge
 from sklearn.metrics import r2_score, mean_squared_error
 import pandas as pd
@@ -939,7 +985,6 @@ for variables in variable_sets:
 
 # Display the results
 for result in results:
-    print(f"Included Variables: {result['Included Variables']}")
     print(f"R^2: {result['R^2']:.3f}, MSE: {result['MSE']:.3f}, Best Alpha: {result['Best Alpha']}")
     print("Coefficients:")
     print(result['Coefficients'])
@@ -972,10 +1017,7 @@ The coefficients for year groups are relatively small, indicating gradual change
 
 # Discussion
 
-The findings underscore the critical importance of economic and educational interventions in addressing adolescent fertility, particularly in high-fertility regions. However, several limitations should be noted. 
+The findings highlight the importance of economic and educational interventions in reducing adolescent fertility, particularly in high-fertility regions. However, some limitations should be considered. The use of grouped year variables may oversimplify temporal trends, potentially overlooking finer changes. Multicollinearity among predictors, especially between education and regional variables, may affect coefficient stability despite using Ridge regression. Additionally, excluding factors like cultural influences or healthcare access limits the analysis.
 
-First, the use of grouped year variables may oversimplify temporal changes and miss finer trends within shorter time intervals. Second, multicollinearity among predictors, especially between education and regional variables, could influence the stability of coefficients despite the use of Ridge regression. Third, the exclusion of potentially relevant variables, such as cultural factors or healthcare access, limits the scope of the analysis.
+Future research could address these gaps by incorporating additional predictors, exploring interaction effects, and employing alternative modeling techniques to better understand the complex factors influencing adolescent fertility. Despite these constraints, the study offers valuable insights for policymakers, emphasizing the need for targeted investments in education and economic development to address adolescent fertility challenges effectively.
 
-Future studies could address these limitations by incorporating additional predictors, testing interaction effects, and using alternative modeling techniques to further disentangle the complex relationships influencing adolescent fertility. Despite these limitations, the results provide valuable insights for policymakers aiming to reduce adolescent fertility rates through targeted investments in education and economic development.
-
-# References
